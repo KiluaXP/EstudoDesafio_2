@@ -128,6 +128,14 @@ Experimento do v1 (referência). Repare na coluna Outputs: o v1 abre com frases 
 
 ![Experimento v1 por exemplo](docs/04-experimento-v1-por-exemplo.png)
 
+#### Tracing detalhado: v1 (3 exemplos)
+
+Cada trace mostra a execução (`Target` chamando `ChatGoogleGenerativeAI`), as 5 notas, o relato de entrada e a resposta gerada. No exemplo 3 fica clara a diferença de formato: o v1 abre com "Aqui está a User Story estruturada para o seu time…" e usa negrito e títulos em markdown.
+
+![Trace v1 - exemplo 1](docs/08-trace-v1-exemplo-1.png)
+![Trace v1 - exemplo 2](docs/09-trace-v1-exemplo-2.png)
+![Trace v1 - exemplo 3](docs/10-trace-v1-exemplo-3.png)
+
 ### Histórico de iterações
 
 | Iteração | Modelos (resposta / juiz) | Resultado |
