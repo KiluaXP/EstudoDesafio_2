@@ -116,6 +116,14 @@ Experimentos no dataset de avaliação (o #3 é o v2 aprovado; o #4 é o v1 para
 
 ![Experimentos no LangSmith](docs/01-experimentos.png)
 
+Dataset de avaliação com os 15 exemplos:
+
+![Dataset com 15 exemplos](docs/02-dataset-15-exemplos.png)
+
+Experimento do v2 exemplo a exemplo (entrada, referência, saída do modelo e as 5 notas de cada exemplo):
+
+![Experimento v2 por exemplo](docs/03-experimento-v2-por-exemplo.png)
+
 ### Histórico de iterações
 
 | Iteração | Modelos (resposta / juiz) | Resultado |
