@@ -86,23 +86,27 @@ def push_prompt_to_langsmith(prompt_name: str, prompt_data: dict) -> bool:
         ("user", prompt_data["user_prompt"]),
     ])
     tags = build_tags(prompt_data)
+    description = build_description(prompt_data)
+    client = Client()
 
     print(f"Fazendo push: {full_name}")
     print(f"   Variáveis: {prompt.input_variables}")
     print(f"   Tags: {', '.join(tags)}")
 
     try:
-        url = Client().push_prompt(
+        url = client.push_prompt(
             full_name,
             object=prompt,
             is_public=True,
-            description=build_description(prompt_data),
+            description=description,
             tags=tags,
         )
     except Exception as e:
-        # O Hub rejeita um commit idêntico ao último: o prompt já está atualizado
+        # O Hub rejeita um commit idêntico ao último: o conteúdo já está atualizado,
+        # mas ainda garantimos visibilidade pública e metadados
         if "nothing to commit" in str(e).lower():
-            print("   ✓ Nenhuma alteração desde o último push")
+            client.update_prompt(full_name, is_public=True, description=description, tags=tags)
+            print("   ✓ Nenhuma alteração no conteúdo; metadados e visibilidade atualizados")
             return True
         print(f"❌ Erro ao fazer push: {e}")
         return False
