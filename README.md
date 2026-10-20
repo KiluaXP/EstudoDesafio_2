@@ -124,6 +124,10 @@ Experimento do v2 exemplo a exemplo (entrada, referência, saída do modelo e as
 
 ![Experimento v2 por exemplo](docs/03-experimento-v2-por-exemplo.png)
 
+Experimento do v1 (referência). Repare na coluna Outputs: o v1 abre com frases como "Aqui está a User Story estruturada para…" e às vezes usa markdown (`**User Story:**`), enquanto o v2 começa direto em "Como um…". Essa diferença existe, mas o juiz lite praticamente não a penalizou:
+
+![Experimento v1 por exemplo](docs/04-experimento-v1-por-exemplo.png)
+
 ### Histórico de iterações
 
 | Iteração | Modelos (resposta / juiz) | Resultado |
