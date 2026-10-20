@@ -110,7 +110,11 @@ Por exemplo, o v2 ficou entre 0.75 e 1.00 em F1, entre 0.85 e 1.00 em Clarity e 
 
 > **Observação sobre o juiz:** com o juiz `gemini-flash-lite-latest`, o v1 também passou (média 0.90), bem acima das notas de 0.45 a 0.52 citadas no enunciado. Ou seja, esse modelo lite é um juiz pouco rigoroso e quase não diferenciou os dois prompts. Ele foi usado por restrição de custo: no plano gratuito do Gemini, os modelos não-lite (`gemini-2.5-flash`, `gemini-3.8-flash`) têm limite de 20 requisições por dia, e cada avaliação faz cerca de 60. A diferença real entre v1 e v2 aparece na estrutura das respostas (ver a comparação abaixo e o tracing no LangSmith), mais do que na nota desse juiz.
 
-Screenshots em `docs/` (a pasta `screenshots/` está no `.gitignore` do repositório base).
+### Screenshots
+
+Experimentos no dataset de avaliação (o #3 é o v2 aprovado; o #4 é o v1 para referência):
+
+![Experimentos no LangSmith](docs/01-experimentos.png)
 
 ### Histórico de iterações
 
