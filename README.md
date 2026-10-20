@@ -68,30 +68,60 @@ Além das técnicas, o prompt tem regras explícitas e numeradas (formato da his
 
 ## Resultados Finais
 
-> ⚠️ **Pendente:** preencher após rodar `python src/evaluate.py` com as credenciais configuradas.
+**✅ v2 APROVADO: todas as 5 métricas >= 0.8 (média 0.91).**
 
 ### Evidências no LangSmith
 
-- **Dataset de avaliação (público), com os experimentos:** `<link gerado por share_dataset>`
-- **Prompt publicado:** `https://smith.langchain.com/hub/<seu_username>/bug_to_user_story_v2`
+- **Dataset de avaliação (público), com os 15 exemplos e todos os experimentos:** https://smith.langchain.com/public/67c7866c-6147-42e4-877a-7f823c3360df/d
+- **Prompt publicado:** https://smith.langchain.com/hub/thyago-silva/bug_to_user_story_v2
 
 ### Notas da avaliação final
 
+Modelos: `gemini-3.1-flash-lite` (resposta) e `gemini-flash-lite-latest` (juiz), provider Google, plano gratuito.
+
+```
+==================================================
+Prompt: thyago-silva/bug_to_user_story_v2
+==================================================
+
+Métricas Derivadas:
+  - Helpfulness: 0.91 ✓
+  - Correctness: 0.90 ✓
+
+Métricas Base:
+  - F1-Score: 0.90 ✓
+  - Clarity: 0.93 ✓
+  - Precision: 0.89 ✓
+
+📊 MÉDIA GERAL: 0.9068
+✅ STATUS: APROVADO - Todas as métricas >= 0.8
+```
+
 | Métrica | v1 (original) | v2 (otimizado) |
 |---|---|---|
-| Helpfulness | – | – |
-| Correctness | – | – |
-| F1-Score | – | – |
-| Clarity | – | – |
-| Precision | – | – |
+| Helpfulness | 0.91 | 0.91 |
+| Correctness | 0.89 | 0.90 |
+| F1-Score | 0.89 | 0.90 |
+| Clarity | 0.92 | 0.93 |
+| Precision | 0.90 | 0.89 |
+| **Média** | **0.90** | **0.91** |
+
+Por exemplo, o v2 ficou entre 0.75 e 1.00 em F1, entre 0.85 e 1.00 em Clarity e entre 0.83 e 0.93 em Precision.
+
+> **Observação sobre o juiz:** com o juiz `gemini-flash-lite-latest`, o v1 também passou (média 0.90), bem acima das notas de 0.45 a 0.52 citadas no enunciado. Ou seja, esse modelo lite é um juiz pouco rigoroso e quase não diferenciou os dois prompts. Ele foi usado por restrição de custo: no plano gratuito do Gemini, os modelos não-lite (`gemini-2.5-flash`, `gemini-3.8-flash`) têm limite de 20 requisições por dia, e cada avaliação faz cerca de 60. A diferença real entre v1 e v2 aparece na estrutura das respostas (ver a comparação abaixo e o tracing no LangSmith), mais do que na nota desse juiz.
 
 Screenshots em `docs/` (a pasta `screenshots/` está no `.gitignore` do repositório base).
 
 ### Histórico de iterações
 
-| Iteração | Mudança | Resultado |
+| Iteração | Modelos (resposta / juiz) | Resultado |
 |---|---|---|
-| 1 | Versão inicial do v2 (Role + Few-shot + CoT interno + Skeleton) | – |
+| 1 | `gemini-2.5-flash` / `gemini-2.5-flash` | Inválida: a cota diária gratuita (20 req) acabou no 3º exemplo. Os exemplos com nota tiveram F1 de 0.72 a 0.84, Clarity de 0.80 a 0.89 e Precision de 0.93 a 0.97 |
+| 2 | `gemini-3.1-flash-lite` / `gemini-3.8-flash` | Interrompida: mesmo limite diário de 20 req no juiz |
+| 3 | `gemini-3.1-flash-lite` / `gemini-flash-lite-latest` | **Aprovado**: média 0.91, todas as métricas >= 0.8 |
+| v1 (referência) | `gemini-3.1-flash-lite` / `gemini-flash-lite-latest` | Média 0.90 (ver observação sobre o juiz) |
+
+O prompt v2 foi aprovado na primeira avaliação completa, sem precisar de alterações. As iterações acima registram as mudanças de modelo exigidas pelas cotas.
 
 ### Comparação v1 x v2
 
